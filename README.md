@@ -34,4 +34,4 @@ The scraped data is stored in a SQLite database using [Pony ORM](https://ponyorm
 
 ## Change log
 - **26/04/2019** - Started project following the Scrapy tutorial [here](https://docs.scrapy.org/en/latest/intro/tutorial.html). Built the database services. Temporary fix on the issue of injecting objects into the spiders.
-- **29/04/2019** - Fixed import issues in project. 
+- **29/04/2019** - Fixed import issues in project. Trying to solve issues in the generation of the database tables.
