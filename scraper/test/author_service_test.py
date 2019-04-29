@@ -34,7 +34,6 @@ class AuthorServiceTest(unittest.TestCase):
         self.injector = Injector(modules=[configure])
         self.db = self.injector.get(Database)
 
-
     def tearDown(self):
         self.db.model.drop_all_tables(with_all_data=True)
 

@@ -4,6 +4,7 @@ from scraper.model.entities import Database
 
 
 class AuthorService:
+
     @inject
     def __init__(self, db: Database):
         self.db = db
