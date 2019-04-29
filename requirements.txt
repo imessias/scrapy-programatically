@@ -1,0 +1,6 @@
+pypiwin32
+pony
+twisted
+scrapy
+flask_injector
+injector
