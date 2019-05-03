@@ -4,11 +4,10 @@ from flask_injector import singleton
 from injector import Injector
 from scraper.model.entities import Database
 from scraper.services import SERVICES
-from scraper.services.author_service import AuthorService
+from scraper.services.quote_service import QuoteService
 
 
-class AuthorServiceTest(unittest.TestCase):
-
+class QuoteServiceTest(unittest.TestCase):
     def setUp(self):
 
         def configure(binder):
@@ -35,56 +34,65 @@ class AuthorServiceTest(unittest.TestCase):
     def tearDown(self):
         self.db.model.drop_all_tables(with_all_data=True)
 
-    def testAuthorServices(self):
-        author_service: AuthorService = self.injector.get(AuthorService)
+    def TestQuoteServices(self):
+        quote_service: QuoteService = self.injector.get(QuoteService)
 
         self.assertTrue(True)
-        self.assertIsNotNone(author_service)
+        self.assertIsNotNone(quote_service)
 
         # Testing if database is empty #
-        authors = author_service.list()
-        self.assertFalse(authors)
+        quotes = quote_service.list()
+        self.assertFalse(quotes)
 
         # Testing DB insertion #
-        name = "Albert Einstein"
-        birthdate = "sometime1"
-        bio = "something1"
-        result = author_service.create_author(name=name, birthdate=birthdate, bio=bio)
+        text = "text1"
+        author = "author1"
+        result = quote_service.create_quote(text=text, author=author)
         self.assertIsNotNone(result)
 
-        name = "Stephen Hawking"
-        birthdate = "sometime2"
-        bio = "something2"
-        result = author_service.create_author(name=name, birthdate=birthdate, bio=bio)
+        text = "text2"
+        author = "author2"
+        result = quote_service.create_quote(text=text, author=author)
+        self.assertIsNotNone(result)
+
+        text = "text3"
+        author = "author1"
+        result = quote_service.create_quote(text=text, author=author)
         self.assertIsNotNone(result)
 
         # Testing DB insertion of entry with duplicate "text" field #
-        name = "Albert Einstein"
-        result = author_service.create_author(name=name, birthdate=birthdate, bio=bio)
+        text = "text3"
+        author = "author1"
+        result = quote_service.create_quote(text=text, author=author)
         self.assertIsNone(result)
 
         # Testing listing of elements in DB #
-        authors = author_service.list()
-        self.assertIsNotNone(authors)
-        self.assertTrue(len(authors) == 2)
+        quotes = quote_service.list()
+        self.assertIsNotNone(quotes)
+        self.assertTrue(len(quotes) == 3)
 
-        for x in authors:
-            if x["name"] == "Albert Einstein":
-                self.assertEqual(x["birthdate"], "sometime1")
-                self.assertEqual(x["bio"], "something1")
+        for x in quotes:
+            if x["text"] == "text1":
+                self.assertEqual(x["author"], "author1")
                 result = True
                 break
         self.assertTrue(result)
 
-        for x in authors:
-            if x["name"] == "Stephen Hawking":
-                self.assertEqual(x["birthdate"], "sometime2")
-                self.assertEqual(x["bio"], "something2")
+        for x in quotes:
+            if x["text"] == "text2":
+                self.assertEqual(x["author"], "author2")
+                result = True
+                break
+        self.assertTrue(result)
+
+        for x in quotes:
+            if x["text"] == "text3":
+                self.assertEqual(x["author"], "author1")
                 result = True
                 break
         self.assertTrue(result)
 
 
 if __name__ == "__main__":
-    suite = unittest.defaultTestLoader.loadTestsFromTestCase(AuthorServiceTest)
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(QuoteServiceTest)
     unittest.TextTestRunner().run(suite)

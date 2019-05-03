@@ -4,7 +4,7 @@ from scraper.model.entities import Database
 from scraper.services import SERVICES
 from scraper.item_pipelines import PIPELINES
 from scraper.spiders.author_spider import AuthorSpider
-from .scraper import Scraper
+from scraper.scrape import Scraper
 import os
 import sys
 sys.path.append(os.path.dirname(os.getcwd()))

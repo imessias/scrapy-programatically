@@ -15,7 +15,7 @@ class QuoteService:
         if entry is None:
             quote = self.db.model.Quote(text, author)
             return quote.to_dict()
-        return entry
+        return None
 
     @db_session
     def list(self):

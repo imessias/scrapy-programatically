@@ -13,9 +13,9 @@ class AuthorService:
     def create_author(self, name, birthdate, bio):
         entry = self.db.model.Author.get(lambda s: s.name == name)
         if entry is None:
-            author = self.db.model.Author(name, birthdate, bio)
+            author = self.db.model.Author(name=name, birthdate=birthdate, bio=bio)
             return author.to_dict()
-        return entry
+        return None
 
     @db_session
     def list(self):
