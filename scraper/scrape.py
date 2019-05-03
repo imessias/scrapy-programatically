@@ -3,7 +3,6 @@ from scrapy.crawler import CrawlerProcess
 from scraper.spiders.quotes_spider import QuotesSpider
 from scraper.spiders.author_spider import AuthorSpider
 from scraper.spiders import SPIDERS
-from scraper.item_pipelines.author_pipeline import AuthorDatabasePipeline
 from scraper.services.author_service import AuthorService
 from injector import inject
 
@@ -17,7 +16,8 @@ class Scraper:
     def run_spiders(self):
         process = CrawlerProcess({
             'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
-            'SERVICE': self.service
+            'SERVICE': self.service,
+            'LOG_LEVEL': 'INFO'
         })
 
         #for spider in SPIDERS: 
