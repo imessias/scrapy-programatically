@@ -1,0 +1,5 @@
+twisted
+scrapy
+flask_injector
+injector
+pony
