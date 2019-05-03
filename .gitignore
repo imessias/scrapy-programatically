@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
-data/
+data/*
 */__pycache__/
 _trial_temp/
 .vscode/
